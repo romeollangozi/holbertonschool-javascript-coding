@@ -2,7 +2,7 @@
 const request = require('request');
 
 request(
-  'https://jsonplaceholder.typicode.com/todos',
+  process.argv[2],
   (error, request, body) => {
     if (error) {
       console.log(error);
