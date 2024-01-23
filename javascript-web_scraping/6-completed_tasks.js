@@ -8,8 +8,7 @@ request(process.argv[2], (error, request, body) => {
 
   const res = JSON.parse(body);
   const completedTasks = {};
-
-  res.map((ele) => {
+  for (const ele of res) {
     if (ele.completed) {
       if (ele.userId in completedTasks) {
         completedTasks[ele.userId] += 1;
@@ -17,7 +16,7 @@ request(process.argv[2], (error, request, body) => {
         completedTasks[ele.userId] = 1;
       }
     }
-  });
+  }
 
-  console.log(completedTasks);
+  console.log(JSON.stringify(completedTasks));
 });
