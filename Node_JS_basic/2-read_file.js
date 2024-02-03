@@ -12,6 +12,9 @@ const countStudents = (path) => {
     const arr = data.split('\n');
     arr.shift();
     for (let i = 0; i < arr.length; i += 1) {
+      if (arr[i].length === 0) {
+        arr.splice(i, 1);
+      }
       arr[i] = arr[i].split(',');
     }
     stats.total_students = arr.length;
@@ -28,7 +31,9 @@ const countStudents = (path) => {
     console.log(`Number of students: ${stats.total_students}`);
     for (const field of Object.values(stats.fields)) {
       console.log(
-        `Number of students in ${field.name}: ${field.number}. List: ${field.students.join(', ')})`,
+        `Number of students in ${field.name}: ${
+          field.number
+        }. List: ${field.students.join(', ')})`,
       );
     }
   });
