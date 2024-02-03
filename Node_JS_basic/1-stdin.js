@@ -1,12 +1,10 @@
-const { stdin, stdout } = require('node:process');
+/*eslint-disable*/
+console.log("Welcome to Holberton School, what is your name?");
+process.stdin.on("data", (data) => {
+  process.stdout.write(`Your name is: ${data.toString()}`);
+});
 
-const readline = require('node:readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
-
-readline.question("Welcome to Holberton School, what is your name?\n", (name) => {
-    console.log(`Your name is: ${name}`)
-    console.log("This important software is now closing");
-    readline.close();
+process.stdin.on("close", () => {
+  console.log("This important software is now closing");
+  process.exit(0);
 });
