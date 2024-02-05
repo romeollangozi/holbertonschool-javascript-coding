@@ -1,7 +1,7 @@
 import readDatabase from '../utils.js';
 
 class StudentsController {
-  static getAllStudents = async (req, res) => {
+  static async getAllStudents(req, res) {
     try {
       const data = await readDatabase(process.argv[2]);
       let message = 'This is the list of our students';
@@ -15,9 +15,9 @@ class StudentsController {
     } catch (err) {
       return res.status(500).send(err.message);
     }
-  };
+  }
 
-  static getStudentsByMajor = async (req, res) => {
+  static async getStudentsByMajor(req, res) {
     try {
       const data = await readDatabase(process.argv[2]);
       const major = req.params.major;
@@ -28,7 +28,7 @@ class StudentsController {
     } catch (err) {
       return res.status(500).send(err);
     }
-  };
+  }
 }
 
 export default StudentsController;
