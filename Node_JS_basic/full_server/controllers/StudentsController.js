@@ -20,7 +20,7 @@ class StudentsController {
   static async getStudentsByMajor(req, res) {
     try {
       const data = await readDatabase(process.argv[2]);
-      const major = req.params.major;
+      const { major } = req.params;
       if (!(major in data)) {
         return res.status(500).send('Major parameter must be CS or SWE');
       }
