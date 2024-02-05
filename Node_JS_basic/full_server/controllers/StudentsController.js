@@ -1,0 +1,34 @@
+import readDatabase from '../utils.js';
+
+class StudentsController {
+  static getAllStudents = async (req, res) => {
+    try {
+      const data = await readDatabase(process.argv[2]);
+      let message = 'This is the list of our students';
+      for (const key of Object.keys(data).sort()) {
+        const metaData = `\nNumber of students in ${key}: ${
+          data[key].length
+        }. List: ${data[key].join(', ')}`;
+        message += metaData;
+      }
+      return res.status(200).send(message);
+    } catch (err) {
+      return res.status(500).send(err.message);
+    }
+  };
+
+  static getStudentsByMajor = async (req, res) => {
+    try {
+      const data = await readDatabase(process.argv[2]);
+      const major = req.params.major;
+      if (!(major in data)) {
+        return res.status(500).send('Major parameter must be CS or SWE');
+      }
+      return res.status(200).send(`List: ${data[major].join(', ')}`);
+    } catch (err) {
+      return res.status(500).send(err);
+    }
+  };
+}
+
+export default StudentsController;
